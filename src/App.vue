@@ -1,17 +1,27 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    From component: {{ enabled }}
+    <br>
+    From constant: {{ constantEnabled }}
+    <br>
+    <button @click="toggleEnabled">Press me!</button>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapState, mapMutations } from 'vuex'
+import { property } from './constants'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data: () => ({
+    constantEnabled: property
+  }),
+  computed: {
+    ...mapState(['enabled'])
+  },
+  methods: {
+    ...mapMutations(['toggleEnabled'])
   }
 }
 </script>
